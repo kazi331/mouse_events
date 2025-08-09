@@ -1,0 +1,6 @@
+@import "tailwindcss";
+
+.colorPicker::-webkit-color-swatch-wrapper {
+  border-radius: 100px;
+  padding: 0;
+}
