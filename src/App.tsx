@@ -1,9 +1,9 @@
-import Drag3 from "./Components/Drag3"
+import Drag4 from "./Components/Drag4"
 
 function App() {
   return (
     <div>
-      <Drag3 />
+      <Drag4 />
     </div>
   )
 }
