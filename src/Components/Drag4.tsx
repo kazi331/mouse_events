@@ -56,7 +56,7 @@ export default function Drag4() {
             {
                 cards.map((card) => (<div
                     key={card.id}
-                    className="w-40 h-40  absolute border transition-discrete"
+                    className="w-40 h-40  absolute border"
                     onMouseDown={(e) => mouseDown(e, card.id)}
                     style={{
                         left: card.x + 'px',
