@@ -1,11 +1,12 @@
 import { useRef, useState, type MouseEvent } from "react";
+import generateRandomRgbColor from "../lib/utils";
 
 interface Client { x: number, y: number }
-interface Card extends Client { id: number }
+interface Card extends Client { id: number; bg?: string }
 export default function Drag4() {
     const boxWidth = 160;
     const boxHeight = 160;
-    const [cards, setCards] = useState<Card[]>([{ id: 1, x: 50, y: 60 }])
+    const [cards, setCards] = useState<Card[]>([{ id: 1, x: 50, y: 60, bg: 'rgb(85 103 129)' }])
     const [offset, setOffset] = useState<Client>({ x: 0, y: 0 })
     const [isDragging, setIsDragging] = useState(false);
     const [selectedCard, setselectedCard] = useState<number | null>(null)
@@ -43,7 +44,7 @@ export default function Drag4() {
         const randomX = Math.random() * (containerRect?.width - boxWidth)
         const randomY = Math.random() * (containerRect?.height - boxHeight)
 
-        setCards(prev => [...prev, { id: prev.length + 1, x: randomX, y: randomY }])
+        setCards(prev => [...prev, { id: prev.length + 1, x: randomX, y: randomY, bg: generateRandomRgbColor() }])
     }
     return (
         <div
@@ -55,13 +56,14 @@ export default function Drag4() {
             {
                 cards.map((card) => (<div
                     key={card.id}
-                    className="w-40 h-40 bg-slate-500 absolute border"
+                    className="w-40 h-40  absolute border transition-discrete"
                     onMouseDown={(e) => mouseDown(e, card.id)}
                     style={{
                         left: card.x + 'px',
                         top: card.y + 'px',
-                        borderRadius: isDragging && card.id === selectedCard ? '20px' : '0',
+                        borderRadius: isDragging && card.id === selectedCard ? '20px' : '5px',
                         cursor: isDragging ? 'grabbing' : 'grab',
+                        background: card?.bg
                     }}
                 />))
             }
